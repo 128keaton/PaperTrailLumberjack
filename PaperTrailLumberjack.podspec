@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "PaperTrailLumberjack"
-  s.version          = "0.1.9"
+  s.version          = "0.2.0"
   s.summary          = "A CocoaLumberjack logger to post logs to papertrailapp.com"
   s.description      = <<-DESC
 A CocoaLumberjack logger to post log messages to papertrailapp.com.
@@ -8,7 +8,7 @@ A CocoaLumberjack logger to post log messages to papertrailapp.com.
   s.homepage         = "http://bitbucket.org/rmonkey/papertraillumberjack"
   s.license          = 'MIT'
   s.author           = { "George Malayil Philip" => "george.malayil@roguemonkey.in" }
-  s.source = { :git => "https://bitbucket.org/rmonkey/papertraillumberjack.git" , :tag => s.version.to_s }
+  s.source = { :git => "https://github.com/128keaton/papertraillumberjack.git" , :tag => s.version.to_s }
   s.requires_arc = true
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.10'

@@ -56,6 +56,11 @@
 @property (nonatomic, assign) BOOL useTLS;
 
 /**
+ Specifies whether we should use print debug messages. Default is `NO`.
+ */
+@property (nonatomic, assign) BOOL debug;
+
+/**
 Specifies which RFC to follow for the syslog message format. We default to RFC 3164, so, as not to make a breaking change in newer versions of PapertrailLumberjack.
 */
 @property (nonatomic, assign) RMSyslogRFCType syslogRFCType;

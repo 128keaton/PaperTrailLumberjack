@@ -28,6 +28,7 @@
 
 @synthesize tcpSocket = _tcpSocket;
 @synthesize udpSocket = _udpSocket;
+@synthesize debug = _debug;
 
 +(RMPaperTrailLogger *) sharedInstance
 {
@@ -40,6 +41,7 @@
         _sharedInstance.logFormatter = logFormatter;
         _sharedInstance.useTcp = YES;
         _sharedInstance.useTLS = YES;
+        _sharedInstance.debug = NO;
         _sharedInstance.syslogRFCType = RMSyslogRFCType5424;
     });
     
@@ -78,6 +80,11 @@
     }
 }
 
+-(void) setDebugMode:(BOOL)debug
+{
+    _debug = debug;
+}
+
 #pragma mark - Networking Implementation
 -(void) disconnect
 {
@@ -93,7 +100,7 @@
 -(void) logMessage:(DDLogMessage *)logMessage
 {
     if (self.host == nil || self.host.length == 0 || self.port == 0)
-        return;
+    return;
     
     NSString *logMsg = logMessage.message;
     if (logMsg == nil) {
@@ -120,7 +127,7 @@
 -(void) sendLogOverUdp:(NSString *) message
 {
     if (message == nil || message.length == 0)
-        return;
+    return;
     
     if (self.udpSocket == nil) {
         GCDAsyncUdpSocket *udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
@@ -135,7 +142,7 @@
 -(void) sendLogOverTcp:(NSString *) message
 {
     if (message == nil || message.length == 0)
-        return;
+    return;
     
     @synchronized(self) {
         if (self.tcpSocket == nil) {
@@ -152,7 +159,7 @@
 -(void) connectTcpSocket
 {
     if (self.host == nil || self.port == 0)
-        return;
+    return;
     
     NSError *error = nil;
     [self.tcpSocket connectToHost:self.host onPort:self.port error:&error];
@@ -175,32 +182,44 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
 {
-    NSLog(@"Socket did connect to host");
+    if(_debug == YES){
+        NSLog(@"Socket did connect to host");
+    }
 }
 
 - (void)socketDidSecure:(GCDAsyncSocket *)sock
 {
-    NSLog(@"Socket did secure");
+    if(_debug == YES){
+        NSLog(@"Socket did secure");
+    }
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)error
 {
-    NSLog(@"Socket did disconnect. Error: %@", error);
+    if(_debug == YES){
+        NSLog(@"Socket did disconnect. Error: %@", error);
+    }
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag
 {
-    NSLog(@"Socket did write data");
+    if(_debug == YES){
+        NSLog(@"Socket did write data");
+    }
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag
 {
-    NSLog(@"UDP Socket did write data");
+    if(_debug == YES){
+        NSLog(@"UDP Socket did write data");
+    }
 }
 
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error
 {
-    NSLog(@"UDP Socket Error: %@", error.localizedDescription);
+    if(_debug == YES){
+        NSLog(@"UDP Socket Error: %@", error.localizedDescription);
+    }
 }
 
 #endif

@@ -1,4 +1,5 @@
 # PaperTrailLumberjack
+## **THIS IS A [FORK](https://bitbucket.org/rmonkey/papertraillumberjack/)**
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 PaperTrailLumberjack is a CocoaLumberjack logger that helps log statements to your log destination at [papertrailapp](http://papertrailapp.com).

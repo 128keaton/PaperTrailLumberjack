@@ -26,6 +26,14 @@ Example TCP logging (with TLS):
     [DDLog addLogger:paperTrailLogger];
     DDLogVerbose(@"Hi PaperTrailApp.com");
 
+Debug Mode:
+
+    paperTrailLogger.setDebug(true);
+
+    ....Socket did write data
+    ....Socket did secure
+    
+   
 Your log messages are automatically formatted to meet the syslog specs, which, typically haves a machine name and program name pre-fixed to the log, along with a timestamp. In order to maintain user privacy, PaperTrailLumberjack uses a unique UUID per device (the UUID is random and reset each time the application is deleted and installed again). The program name is the bundle name stripped of whitespaces.
 
 Sample log output:
@@ -66,7 +74,7 @@ PaperTrailLumberjack can be installed by multiple methods
         use_frameworks!
         
         target "YourTargetName" do
-           pod "PaperTrailLumberjack"
+           pod "PaperTrailLumberjack", :git => "https://github.com/128keaton/PaperTrailLumberjack"
         end
 
 
@@ -82,7 +90,7 @@ PaperTrailLumberjack can be installed by multiple methods
         use_frameworks!
         
         target "YourTargetName" do
-           pod "PaperTrailLumberjack/Swift"
+           pod "PaperTrailLumberjack/Swift", :git => "https://github.com/128keaton/PaperTrailLumberjack"
         end
 
     In your project, import PaperTrailLumberJack
@@ -95,7 +103,7 @@ PaperTrailLumberjack can be installed by multiple methods
     Carthage is a light-weight dependency manager, that is a lot less intrusive, as compared to Cocoapods. To install with Carthage,
 add the following entry into your Cartfile and follow the instructions listed [here](https://github.com/Carthage/Carthage)
 
-        git "https://bitbucket.org/rmonkey/papertraillumberjack.git"
+        git "https://github.com/128keaton/PaperTrailLumberjack"
         
     You will have to do a non-binary build with Carthage (as otherwise CocoaLumberjack-Swift is not built)
     
